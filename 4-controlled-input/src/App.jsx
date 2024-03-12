@@ -27,7 +27,6 @@ function App() {
 
   return (
     <div className="form">
-      <main>
         <section className="form-container">
           <h1>Add USer</h1>
           <form onSubmit={formSubmit}>
@@ -48,10 +47,9 @@ function App() {
         <section className="users">
           <h2>Users</h2>
           {users.map((person) => {
-            return <h3 key={person.id}>{person.name}</h3>;
+            return <h3 key={person.id} className='name'>{person.name}</h3>;
           })}
         </section>
-      </main>
     </div>
   );
 }

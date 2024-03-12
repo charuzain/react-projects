@@ -1,5 +1,89 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(249, 184, 217);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  max-width: 1140px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-width: 400px;
+}
+
+.form-container {
+  background-color: rgb(236, 225, 225);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 10px;
+}
+.form-container h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  border: none;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-size: 1rem;
+  background-color: rgb(236, 205, 215);
+}
+
+button:hover {
+  background-color: pink;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: rgb(212, 25, 56);
+  color: white;
+  transform: translateY(2px);
+}
+
+input {
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+.users {
+  background-color: rgb(236, 225, 225);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 10px;
+}
+
+.name {
+  background-color: white;
+  padding: 0.8rem;
+  border-radius: 10px;
 }
