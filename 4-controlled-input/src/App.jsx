@@ -12,9 +12,15 @@ function App() {
   const [users, setUsers] = useState(data);
   const [userName, setUserName] = useState('');
   // For checked input create a state and set the initial value to false
-  // Add checked attribute to input and set it equal to state value 
+  // Add checked attribute to input and set it equal to state value
   // add onchange handler to the input
   const [shippingVal, setShippingVal] = useState(false);
+
+  //Select Input
+
+  const frameWorkList = ['react', 'angular', 'vue', 'svelte'];
+
+  const [framework, setFramework] = useState('react');
 
   const formSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +39,10 @@ function App() {
     setShippingVal(event.target.checked);
   };
 
+  const selectHandler = (event) => {
+    setFramework(event.target.value);
+  };
+
   return (
     <div className="form">
       <section className="form-container">
@@ -48,7 +58,7 @@ function App() {
               onChange={nameChangeHandler}
             />
           </div>
-          {/* <h4>Checked Input</h4> */}
+          {/* <h3>CHECKED INPUT</h3> */}
           <div className="checkbox-row">
             <label htmlFor="shipping">Free Shipping</label>
             <input
@@ -59,6 +69,21 @@ function App() {
               onChange={shippingChangeHandler}
             />
           </div>
+          {/* <h3>OPTIONS</h3> */}
+          <div className="option-row">
+            <label htmlFor="framework">Knows Framework</label>
+            <select
+              name="framework"
+              id="framework"
+              value={framework}
+              onChange={selectHandler}
+            >
+              {frameWorkList.map((framework) => {
+                return <option key={framework}>{framework}</option>;
+              })}
+            </select>
+          </div>
+
           <button>Submit</button>
         </form>
       </section>
