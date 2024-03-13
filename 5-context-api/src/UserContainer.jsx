@@ -1,12 +1,15 @@
-/* eslint-disable react/prop-types */
-const UserContainer = (props) => {
-  console.log(props.user);
+import { NavBarContext } from './NavBar';
+import { useContext } from 'react';
+
+const UserContainer = () => {
+  const context = useContext(NavBarContext);
+  console.log(context);
   return (
     <div className="user-container">
-      {props.user ? (
+      {context.user ? (
         <>
-          <p>Hello {props.user.name}</p>
-          <button className="btn" onClick={props.logout}>
+          <p>Hello {context.user.name}</p>
+          <button className="btn" onClick={context.logout}>
             Logout
           </button>
         </>

@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import UserContainer from "./UserContainer";
 
-const NavLinks = (props) => {
-  console.log(props)
+const NavLinks = () => {
   return (
     <div className="link-container">
       <ul>
@@ -13,7 +12,7 @@ const NavLinks = (props) => {
           <a href="#">About</a>
         </li>
       </ul>
-      <UserContainer user={props.user} logout = {props.logout} />
+      <UserContainer />
     </div>
   );
 };
