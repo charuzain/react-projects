@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import './App.css';
 
-const data = [
+const people = [
   {
     id: 1,
     name: 'Tim',
@@ -20,33 +20,57 @@ const data = [
   },
 ];
 function App() {
-  const [people, setPeople] = useState(data);
+  // const [people, setPeople] = useState(data);
+
+  const defaultState = {
+    data: people,
+  };
+
+  const reducer = (defaultState, action) => {
+    console.log(action);
+    console.log(defaultState.data);
+    if (action.type === 'CLEAR_LIST') {
+      return { ...defaultState, data: [] };
+    }
+    if (action.type === 'RESET_LIST') {
+      return { ...defaultState, data: people };
+    }
+    if (action.type === 'REMOVE_ITEM') {
+      const filteredNames = defaultState.data.filter((person) => person.id !== action.payload);
+      return { ...defaultState, data: filteredNames };
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
   const removeHandler = (id) => {
-    const filteredNames = people.filter((person) => person.id !== id);
-    setPeople(filteredNames);
+    dispatch({ type: 'REMOVE_ITEM', payload: id });
+    // const filteredNames = people.filter((person) => person.id !== id);
+    // setPeople(filteredNames);
   };
 
   const clearHandler = () => {
-    setPeople([]);
+    dispatch({ type: 'CLEAR_LIST' });
+    // setPeople([]);
   };
 
   const resetHandler = () => {
-    setPeople(data);
+    dispatch({ type: 'RESET_LIST' });
+    // setPeople(data);
   };
-
+  // console.log(state);
   return (
     <div className="person-container">
-      <h1>Use Reducer</h1>
-      {people.map((person) => {
+      <h1>Usse Reducer</h1>
+      {state.data.map((person) => {
         return (
-          <>
-            <p key={person.id}>{person.name}</p>
+          <div key={person.id}>
+            <p>{person.name}</p>
             <button onClick={() => removeHandler(person.id)}>Remove</button>
-          </>
+          </div>
         );
       })}
-      {people.length > 0 ? (
+      {state.data.length > 0 ? (
         <button onClick={clearHandler}>Clear</button>
       ) : (
         <button onClick={resetHandler}>Reset</button>
