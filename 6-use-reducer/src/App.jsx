@@ -21,32 +21,36 @@ const data = [
 ];
 function App() {
   const [people, setPeople] = useState(data);
+
   const removeHandler = (id) => {
-    const filteredNames = people.filter(person => person.id !== id)
-    setPeople(filteredNames)
-  }
+    const filteredNames = people.filter((person) => person.id !== id);
+    setPeople(filteredNames);
+  };
 
   const clearHandler = () => {
-    setPeople([])
-  }
+    setPeople([]);
+  };
 
   const resetHandler = () => {
-    setPeople(data)
-  }
+    setPeople(data);
+  };
 
   return (
-    <div className='person-container'>
+    <div className="person-container">
       <h1>Use Reducer</h1>
       {people.map((person) => {
         return (
           <>
             <p key={person.id}>{person.name}</p>
-            <button onClick={()=>removeHandler(person.id)}>Remove</button>
+            <button onClick={() => removeHandler(person.id)}>Remove</button>
           </>
         );
       })}
-      {people.length > 0 ?
-        <button onClick ={clearHandler}>Clear</button>  : <button onClick={resetHandler}>Reset</button>}
+      {people.length > 0 ? (
+        <button onClick={clearHandler}>Clear</button>
+      ) : (
+        <button onClick={resetHandler}>Reset</button>
+      )}
     </div>
   );
 }
