@@ -1,29 +1,5 @@
 ## Steps
 
-#### Server
-
-Open server directory.
-
-- run "npm install" and "npm start"
-
-#### Node Course
-
-[Node Tutorial and Projects Course](https://www.udemy.com/course/nodejs-tutorial-and-projects-course/?referralCode=E94792BEAE9ADD204BC7)
-
-#### Starter
-
-- run "npm install" and "npm run dev"
-- Grocery Bud structure
-
-#### Explore Setup
-
-Explore files and folders
-
-#### Custom Axios Instance
-
-Create utils.js and setup custom axios instance with
-following base url:'http://localhost:5000/api/tasks'
-
 #### HTTP Methods
 
 HTTP (Hypertext Transfer Protocol) methods define the types of actions that can be performed on a web server to retrieve, modify or delete information. The most commonly used HTTP methods are GET, POST, PATCH and DELETE. GET retrieves data, POST sends data to be processed, PATCH update or replace existing data, DELETE removes data.
@@ -122,6 +98,9 @@ React Query is a state management library that simplifies the process of fetchin
 
 [React Query](https://tanstack.com/query/v4/docs/react/overview)
 
+
+In the latest version of React Query (V5), the 'isLoading' property has been replaced with 'isPending'. This change is purely in naming; the functionality remains the same, where the property is true if the query has not yet received data. If you are using a different version of React Query than the one provided in the starter package, remember to use 'isPending' instead of 'isLoading'.
+
 #### Install
 
 ```sh
@@ -129,6 +108,10 @@ npm i @tanstack/react-query
 ```
 
 #### Setup React Query
+- After installing wrap <App> in QueryClientProvider.
+- Import QueryClient as well as QueryClientProvider
+- Create new instance of QueryClient
+- pass that instance to QueryClientProvider via client attribute
 
 main.jsx
 
