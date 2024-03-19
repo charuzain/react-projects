@@ -4,7 +4,7 @@ import customFetch from './utils';
 const Items = ({ items }) => {
   const result = useQuery({
     queryKey: ['tasks'],
-    queryFn: () => customFetch.get('/s'),
+    queryFn: () => customFetch.get('/'),
   });
 
   const { isLoading, data, error, isError } = result;
@@ -17,7 +17,7 @@ const Items = ({ items }) => {
   }
   if (error) {
     // return <p>{error.message}</p>; // display axios error
-     return <p>{error.response.data}</p>; // display error message send by server
+    return <p>{error.response.data}</p>; // display error message send by server
   }
 
   return (

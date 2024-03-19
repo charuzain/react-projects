@@ -204,6 +204,10 @@ const handleSubmit = (e) => {
 };
 ```
 
+<!--When fetch useQuery hook  -->
+<!-- For adding , updating amd deleting useMutatiion hook -->
+<!-- It takes mutationFn -->
+
 #### useMutation Helper Options
 
 useMutation comes with some helper options that allow quick and easy side-effects at any stage during the mutation lifecycle. These come in handy for both invalidating and refetching queries after mutations
