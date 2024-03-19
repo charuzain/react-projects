@@ -98,7 +98,6 @@ React Query is a state management library that simplifies the process of fetchin
 
 [React Query](https://tanstack.com/query/v4/docs/react/overview)
 
-
 In the latest version of React Query (V5), the 'isLoading' property has been replaced with 'isPending'. This change is purely in naming; the functionality remains the same, where the property is true if the query has not yet received data. If you are using a different version of React Query than the one provided in the starter package, remember to use 'isPending' instead of 'isLoading'.
 
 #### Install
@@ -108,6 +107,7 @@ npm i @tanstack/react-query
 ```
 
 #### Setup React Query
+
 - After installing wrap <App> in QueryClientProvider.
 - Import QueryClient as well as QueryClientProvider
 - Create new instance of QueryClient
@@ -171,7 +171,7 @@ const Items = () => {
     return <p style={{ marginTop: '1rem ' }}>{error.message}</p>;
   }
   return (
-    <div className='items'>
+    <div className="items">
       {data.taskList.map((item) => {
         return <SingleItem key={item.id} item={item} />;
       })}
@@ -217,6 +217,7 @@ const { mutate: createTask, isLoading } = useMutation({
   mutationFn: (taskTitle) => customFetch.post('/', { title: taskTitle }),
   onSuccess: () => {
     // do something
+    //
   },
   onError: () => {
     // do something
