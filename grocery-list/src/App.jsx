@@ -1,6 +1,6 @@
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-   import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const items = [
@@ -30,9 +30,11 @@ function App() {
         <ul>
           {items.map((item) => (
             <li key={item.id}>
-              <input type="checkbox" id={item.itemName} />
-              <label htmlFor={item.itemName}>{item.itemName}</label>
-              <FontAwesomeIcon icon={faTrash} />
+              <div className='list-left'>
+                <input type="checkbox" id={item.itemName} />
+                <label htmlFor={item.itemName}>{item.itemName}</label>
+              </div>
+              <FontAwesomeIcon icon={faTrash} className="icon" />
             </li>
           ))}
         </ul>
