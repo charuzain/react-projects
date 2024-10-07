@@ -24,6 +24,7 @@ function App() {
   ]);
 
   const [newItem, setNewItem] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const deleteItem = (id) => {
     const newItems = items.filter((item) => item.id !== id);
@@ -32,13 +33,11 @@ function App() {
   };
 
   const handleAddNewItem = (e) => {
-    console.log(e.target.value);
     setNewItem(e.target.value);
   };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(newItem);
     if (!newItem.trim()) {
       return;
     }
@@ -51,6 +50,26 @@ function App() {
     setNewItem('');
   };
 
+  const searchSubmitHandler = (e) => {
+    console.log('click');
+    e.preventDefault();
+  };
+
+  const searchChangeHandler = (e) => {
+    // if searchterm is empty , display initial list
+
+    let currentSearchTerm = e.target.value; //milu
+    setSearchTerm(currentSearchTerm);
+    // if (currentSearchTerm.trim().length === 0) {
+    //   console.log('first');
+    //   setItems(...items);
+    // } else {
+    //   const newItemList = items.filter((item) =>
+    //     item.itemName.toLowerCase().includes(currentSearchTerm.toLowerCase())
+    //   );
+    //   setItems(newItemList);
+    // }
+  };
   return (
     <>
       <header>
@@ -71,14 +90,19 @@ function App() {
             </button>
           </form>
         </section>
-        <form className="search">
-          <input type="text" name="" id="" placeholder="Search for An Item" />
+        <form className="search" onSubmit={searchSubmitHandler}>
+          <input
+            type="text"
+            placeholder="Search for An Item"
+            value={searchTerm}
+            onChange={searchChangeHandler}
+          />
         </form>
         {!items.length ? (
           <p className="item">No Items Present in the list</p>
         ) : (
           <ul>
-            {items.map((item) => (
+            {items.filter((i) =>i.itemName.toLowerCase().includes(searchTerm.toLowerCase()) ).map((item) => (
               <li key={item.id}>
                 <div className="list-left">
                   <input type="checkbox" id={item.itemName} />
