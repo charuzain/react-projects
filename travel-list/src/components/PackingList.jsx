@@ -1,5 +1,9 @@
-const PackingList = ({ items, checkBoxHandler }) => {
-  
+const PackingList = ({
+  items,
+  checkBoxHandler,
+  removeItemHandler,
+  clearListHandler,
+}) => {
   return (
     <>
       <ul>
@@ -13,9 +17,13 @@ const PackingList = ({ items, checkBoxHandler }) => {
             <label>
               {item.quantity} {item.itemName}
             </label>
+            <button onClick={() => removeItemHandler(item.id)}>X</button>
           </li>
         ))}
       </ul>
+      <div>
+        <button onClick={clearListHandler}>Clear List</button>
+      </div>
     </>
   );
 };

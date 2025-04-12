@@ -3,11 +3,16 @@ import { useState } from 'react';
 const Form = ({ onSubmit }) => {
   const [selectedNumber, setSelectedNum] = useState(1);
   const [item, setItem] = useState('');
+  const [itemError, setItemError] = useState('');
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    onSubmit(selectedNumber, item);
-    setItem('');
+    if (item.trim() === '') {
+      setItemError('Add an item to list');
+    } else {
+      onSubmit(selectedNumber, item);
+      setItem('');
+    }
   };
   return (
     <form onSubmit={formSubmitHandler}>
@@ -24,12 +29,15 @@ const Form = ({ onSubmit }) => {
         <option value={6}>6</option>
         <option value={7}>7</option>
       </select>
-      <input
-        type="text"
-        placeholder="item"
-        value={item}
-        onChange={(e) => setItem(e.target.value)}
-      />
+      <div>
+        <input
+          type="text"
+          placeholder="item"
+          value={item}
+          onChange={(e) => setItem(e.target.value)}
+        />
+        {itemError && <p>{itemError}</p>}
+      </div>
       <button type="submit">Add</button>
     </form>
   );
