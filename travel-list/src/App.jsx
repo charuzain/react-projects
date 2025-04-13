@@ -32,6 +32,24 @@ function App() {
   const clearListHandler = () => {
     setItems([]);
   };
+
+  const onSort = (sortInput) => {
+    console.log(sortInput);
+    const timeObj = items.map((item) => item.id);
+    console.log(timeObj);
+    if (sortInput === 'order') {
+      setItems(items.sort((a, b) => a.id - b.id));
+    }
+    if (sortInput === 'quantity') {
+      setItems(items.sort((a, b) => a.quantity - b.quantity));
+    }
+    if (sortInput === 'status') {
+      setItems(items.sort((a, b) => a.isPacked - b.isPacked));
+    }
+    if (sortInput === 'itemName') {
+      setItems(items.sort((a, b) => a.itemName.localeCompare(b.itemName)));
+    }
+  };
   return (
     <>
       <Header />
@@ -41,6 +59,7 @@ function App() {
         checkBoxHandler={checkBoxHandler}
         removeItemHandler={removeItemHandler}
         clearListHandler={clearListHandler}
+        onSort={onSort}
       />
       <Stats items={items} />
     </>

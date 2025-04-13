@@ -1,9 +1,21 @@
+import { useState } from "react";
+
 const PackingList = ({
   items,
   checkBoxHandler,
   removeItemHandler,
   clearListHandler,
+  onSort
 }) => {
+
+  const [sortBy, setSortBy] = useState("order")
+  
+  const sortHandler = (e) => {
+    console.log(e.target.value)
+    setSortBy(e.target.value);
+    // onSort(sortBy)
+    onSort(e.target.value);
+  }
   return (
     <>
       <ul>
@@ -22,6 +34,14 @@ const PackingList = ({
         ))}
       </ul>
       <div>
+        <div>
+          <select value={sortBy} onChange={sortHandler}>
+            <option value={'order'}>Sort by input order</option>
+            <option value={'itemName'}>Sort by description</option>
+            <option value={'status'}>Sort by packed status</option>
+            <option value={'quantity'}>Sort by quantity</option>
+          </select>
+        </div>
         <button onClick={clearListHandler}>Clear List</button>
       </div>
     </>
