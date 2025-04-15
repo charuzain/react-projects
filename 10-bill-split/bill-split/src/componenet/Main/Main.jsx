@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Main/Main.scss';
 
 const Main = () => {
   const initialFriends = [
@@ -22,39 +23,44 @@ const Main = () => {
     },
   ];
   return (
-    <>
-      <ul>
+    <div className='friend'>
+      <ul className="friend__list">
         {initialFriends.map((friend) => (
-          <li key={friend.id}>
-            <img src={friend.image} alt={friend.image} />
-            <div>
-              <p>{friend.name}</p>
+          <li key={friend.id} className="friend__item">
+            <img
+              src={friend.image}
+              alt={friend.image}
+              className="friend__image"
+            />
+            <div className='friend__detail'>
+              <p className="friend__name">{friend.name}</p>
               {friend.balance > 0 && (
-                <p>
+                <p className="friend__balance friend__balance--green">
                   {friend.name} owes you {friend.balance}$
                 </p>
               )}
               {friend.balance < 0 && (
-                <p>
+                <p className="friend__balance friend__balance--red">
                   {`You owe ${friend.name}
               ${Math.abs(friend.balance)}$`}
                 </p>
               )}
               {friend.balance === 0 && (
-                <p>
+                <p className="friend__balance">
+                  {' '}
                   {`You and ${friend.name}
              are even`}
                 </p>
               )}
             </div>
             <div>
-              <button>Select</button>
+              <button className='friend__select'>Select</button>
             </div>
           </li>
         ))}
       </ul>
-      <button>Add Friend</button>
-    </>
+      <button className='btn'>Add Friend</button>
+    </div>
   );
 };
 
