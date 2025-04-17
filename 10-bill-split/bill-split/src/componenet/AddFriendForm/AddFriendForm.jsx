@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../AddFriendForm/AddFriendForm.scss';
 
 const AddFriendForm = ({ closeHandler, onAddFriend }) => {
   const [friendName, setFriendName] = useState('');
@@ -31,25 +32,31 @@ const AddFriendForm = ({ closeHandler, onAddFriend }) => {
 
   return (
     <>
-      <form onSubmit={addFriendHandler}>
-        <div>
-          <label htmlFor="friendName">Friend name</label>
+      <form onSubmit={addFriendHandler} className="form">
+        <div className="form__group">
+          <label htmlFor="friendName" className="form__label">
+            Friend name
+          </label>
           <input
             type="text"
             name="friendName"
             id="friendName"
             value={friendName}
             onChange={nameHandler}
+            className="form__input"
           />
         </div>
-        <div>
-          <label htmlFor="friendImage">Image URL</label>
+        <div className="form__group">
+          <label htmlFor="friendImage" className="form__label">
+            Image URL
+          </label>
           <input
             type="text"
             name="friendImage"
             id="friendImage"
             value={friendimage}
             onChange={imageHandler}
+            className="form__input"
           />
         </div>
         <button> Add</button>

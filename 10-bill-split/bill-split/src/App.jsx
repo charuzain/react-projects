@@ -6,7 +6,7 @@ import Main from './componenet/Main/Main';
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Main />
       {/* <Footer /> */}
     </>

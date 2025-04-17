@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../Main/Main.scss';
 import AddFriendForm from '../AddFriendForm/AddFriendForm';
+import BillForm from '../BillForm/BillForm';
+import FriendListItem from '../FriendListItem/FriendListItem';
 const initialFriends = [
   {
     id: 118836,
@@ -25,6 +27,8 @@ const initialFriends = [
 const Main = () => {
   const [friends, setFriends] = useState(initialFriends);
   const [addFriend, setAddFriend] = useState(false);
+  const [billForm, setBillForm] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
 
   const friendFormHandler = () => {
     setAddFriend(!addFriend);
@@ -34,56 +38,67 @@ const Main = () => {
     setAddFriend(!addFriend);
   };
 
+  const editHandler = (newFriend) => {
+    const friendData = friends.map((friend) => {
+      if (friend.id === newFriend.id) {
+        friend.balance = newFriend.balance;
+        return friend;
+      }
+      return friend;
+    });
+    setFriends(friendData);
+        setBillForm(false);
+  };
+
   const onAddFriend = (newFriend) => {
     setFriends([...friends, newFriend]);
   };
 
+  const selectHandler = (friend) => {
+    console.log(friend);
+    setBillForm(true);
+    setSelectedFriend(friend);
+  };
+
+  const closeBillHandler = () => {
+    setSelectedFriend(null);
+    setBillForm(false);
+  };
+
   return (
-    <div className="friend">
-      <ul className="friend__list">
-        {friends.map((friend) => (
-          <li key={friend.id} className="friend__item">
-            <img
-              src={friend.image}
-              alt={friend.image}
-              className="friend__image"
+    <main className="main">
+      <div className="friend">
+        <ul className="friend__list">
+          {friends.map((friend) => (
+            <FriendListItem
+              key={friend.id}
+              friend={friend}
+              closeBillHandler={closeBillHandler}
+              selectHandler={selectHandler}
+              billForm={billForm}
+              selectedFriend={selectedFriend}
             />
-            <div className="friend__detail">
-              <p className="friend__name">{friend.name}</p>
-              {friend.balance > 0 && (
-                <p className="friend__balance friend__balance--green">
-                  {friend.name} owes you {friend.balance}$
-                </p>
-              )}
-              {friend.balance < 0 && (
-                <p className="friend__balance friend__balance--red">
-                  {`You owe ${friend.name}
-              ${Math.abs(friend.balance)}$`}
-                </p>
-              )}
-              {friend.balance === 0 && (
-                <p className="friend__balance">
-                  {' '}
-                  {`You and ${friend.name}
-             are even`}
-                </p>
-              )}
-            </div>
-            <div>
-              <button className="friend__select">Select</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      {!addFriend && (
-        <button className="btn" onClick={friendFormHandler}>
-          Add Friend
-        </button>
+          ))}
+        </ul>
+        {!addFriend && (
+          <button className="btn" onClick={friendFormHandler}>
+            Add Friend
+          </button>
+        )}
+
+        {addFriend && (
+          <AddFriendForm
+            closeHandler={closeHandler}
+            onAddFriend={onAddFriend}
+          />
+        )}
+      </div>
+
+      {/* Split bill */}
+      {billForm && (
+        <BillForm selectedFriend={selectedFriend} editHandler={editHandler} />
       )}
-      {addFriend && (
-        <AddFriendForm closeHandler={closeHandler} onAddFriend={onAddFriend} />
-      )}
-    </div>
+    </main>
   );
 };
 
