@@ -11,18 +11,14 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
   const queryHandler = (e) => {
     setQuery(e.target.value);
   };
 
   useEffect(() => {
-    // if (query.trim().length < 3) {
-    //   return;
-    // }
     async function fetchMovie() {
-      // if (query.trim().length < 3) {
-      //   return;
-      // }
       setError(false);
       setLoading(true);
       await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`)
@@ -63,9 +59,16 @@ function App() {
       <NavBar query={query} queryHandler={queryHandler} />
       <main>
         {loading && <p>Loading.....</p>}
-        {!error && !loading && <MovieListContainer movies={movies} />}
+        {!error && !loading && (
+          <MovieListContainer
+            movies={movies}
+            setSelectedId={setSelectedId}
+          />
+        )}
         {error && <p>{`🛑 ${error} 🛑`}</p>}
-        <WatchedMovieContainer />
+        <WatchedMovieContainer
+          selectedId={selectedId}
+        />
       </main>
     </>
   );

@@ -22,22 +22,26 @@ body {
 }
 
 main {
-  /* border: 2px solid pink; */
+  border: 2px solid pink;
   max-width: 1280px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  /* display: flex;
+  justify-content: space-between; */
   margin: 2rem auto;
   width: 100%;
-  gap: 2rem;
+  min-height: 100vh;
+  /* gap: 2rem; */
 
   /* margin: 0 auto; */
 }
-main * {
+/* main * {
   border: 2px solid red;
   flex: 1;
   padding: 1rem;
   border-radius: 8px;
-}
+} */
 
 nav {
   background-color: rgb(131, 6, 247);
