@@ -1,0 +1,28 @@
+.watched-movie {
+  border-bottom: 1px solid aliceblue;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+.watched-movie__image {
+  width: 100%;
+}
+.watched-movie__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem;
+}
+.watched-movie__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.watched-movie__sub-detail {
+  display: flex;
+  gap: 2rem;
+}
+.watched-movie__cancel {
+  align-content: center;
+}/*# sourceMappingURL=WatchedMovie.css.map */

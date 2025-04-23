@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import WatchedMovieContainer from './components/MovieDetail';
 import Statistics from './components/Statistics';
 import MovieDetail from './components/MovieDetail';
+import WatchedMovie from './components/WatchedMovie';
 
 const API_KEY = '750cb857';
 
@@ -15,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [showMovieDetail, setShowMovieDetail] = useState(false);
+  const [watchedMovies, setWatchedMovies] = useState([]);
 
   const queryHandler = (e) => {
     setQuery(e.target.value);
@@ -23,6 +25,10 @@ function App() {
   const movieClickHandler = (id) => {
     setSelectedId(id);
     setShowMovieDetail(!showMovieDetail);
+  };
+
+  const addMovieHandler = (newWatchedMovie) => {
+    setWatchedMovies([...watchedMovies, newWatchedMovie]);
   };
 
   useEffect(() => {
@@ -75,11 +81,19 @@ function App() {
           />
         )}
         {error && <p>{`🛑 ${error} 🛑`}</p>}
-        <div className="watched-movie">
+        <div className="right-container">
           <div className="close close-watched">-</div>
 
           {!selectedId && <Statistics />}
-          {selectedId  &&<MovieDetail selectedId={selectedId} />}
+          {watchedMovies.length > 0 && (
+            <WatchedMovie watchedMovies={watchedMovies} />
+          )}
+          {selectedId && (
+            <MovieDetail
+              selectedId={selectedId}
+              addMovieHandler={addMovieHandler}
+            />
+          )}
         </div>
       </main>
     </>

@@ -1,8 +1,4 @@
 #root {
-  /* max-width: 1280px; */
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  /* text-align: center; */
   border: 2px solid orange;
   display: flex;
   flex-direction: column;
@@ -27,34 +23,21 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  /* display: flex;
-  justify-content: space-between; */
   margin: 2rem auto;
   width: 100%;
   min-height: 100vh;
-  /* gap: 2rem; */
-
-  /* margin: 0 auto; */
 }
-/* main * {
-  border: 2px solid red;
-  flex: 1;
-  padding: 1rem;
-  border-radius: 8px;
-} */
 
 nav {
   background-color: rgb(131, 6, 247);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* border: 2px solid pink; */
   padding: 1rem 2rem;
   margin: 1rem;
   border-radius: 8px;
 }
-.watched-movie{
-border: 10px solid red;
+.right-container{
 position: relative;
 }
 .close-watched{

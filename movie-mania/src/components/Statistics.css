@@ -1,0 +1,21 @@
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: rgb(158, 157, 157);
+  border-radius: 8px;
+}
+.stat__card {
+  padding: 0.4rem 1rem;
+  font-weight: bold;
+}
+.stat__title {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.stat__container {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}/*# sourceMappingURL=Statistics.css.map */

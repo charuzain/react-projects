@@ -1,0 +1,35 @@
+.watched-movie {
+  border-bottom: 1px solid aliceblue;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem;
+
+  &__image {
+    width: 100%;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    // border: 3px solid pink;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  &__title{
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  &__sub-detail {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__cancel {
+    // border: 3px solid pink;
+    align-content: center;
+  }
+}
