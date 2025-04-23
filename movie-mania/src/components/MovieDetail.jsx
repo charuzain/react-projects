@@ -3,7 +3,7 @@ import './MovieDetail.scss';
 
 const API_KEY = '750cb857';
 
-const MovieDetail = ({ selectedId, addMovieHandler }) => {
+const MovieDetail = ({ selectedId, addMovieHandler, watchedMovies }) => {
   const [selectedMovie, setSelectedMovie] = useState({});
 
   useEffect(() => {
@@ -12,10 +12,7 @@ const MovieDetail = ({ selectedId, addMovieHandler }) => {
         .then((res) => {
           return res.json();
         })
-        .then((data) =>
-          // console.log(data)
-          setSelectedMovie(data)
-        );
+        .then((data) => setSelectedMovie(data));
     }
     fetchSelectedMovie();
   }, [selectedId]);
@@ -42,21 +39,25 @@ const MovieDetail = ({ selectedId, addMovieHandler }) => {
       </header>
       <section className="selected-movie__rating-section">
         <div> ✩✩✩✩✩✩✩✩✩✩✩</div>
-        <button
-          className="selected-movie__btn"
-          onClick={() =>
-            addMovieHandler({
-              imdbID: selectedMovie.imdbID,
-              Poster: selectedMovie.Poster,
-              Title: selectedMovie.Title,
-              imdbRating: selectedMovie.imdbRating,
-              userRating: 7,
-              Runtime: selectedMovie.Runtime,
-            })
-          }
-        >
-          + Add to List
-        </button>
+        {/* display this button only if movie doesnot exits in watchedMovies array if it has selectedId */}
+        {!watchedMovies.filter((movie) => movie.imdbID === selectedId).length >
+          0 && (
+          <button
+            className="selected-movie__btn"
+            onClick={() =>
+              addMovieHandler({
+                imdbID: selectedMovie.imdbID,
+                Poster: selectedMovie.Poster,
+                Title: selectedMovie.Title,
+                imdbRating: selectedMovie.imdbRating,
+                userRating: 7,
+                Runtime: selectedMovie.Runtime,
+              })
+            }
+          >
+            + Add to List
+          </button>
+        )}
       </section>
       <section className="selected-movie__description">
         <p className="movie-plot">{selectedMovie.Plot}</p>

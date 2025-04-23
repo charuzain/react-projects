@@ -92,6 +92,7 @@ function App() {
             <MovieDetail
               selectedId={selectedId}
               addMovieHandler={addMovieHandler}
+              watchedMovies={watchedMovies}
             />
           )}
         </div>
