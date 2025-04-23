@@ -1,7 +1,7 @@
 import React from 'react';
 import './WatchedMovie.scss';
 
-const WatchedMovie = ({ watchedMovies }) => {
+const WatchedMovie = ({ watchedMovies, removeMovieHandler }) => {
   return (
     <ul>
       {watchedMovies.map((movie) => (
@@ -19,7 +19,12 @@ const WatchedMovie = ({ watchedMovies }) => {
               <p className="watched-movie__time">🕰{movie.Runtime}</p>
             </div>
           </div>
-          <div className="watched-movie__cancel">❌</div>
+          <div
+            className="watched-movie__cancel"
+            onClick={() => removeMovieHandler(movie.imdbID)}
+          >
+            ❌
+          </div>
         </li>
       ))}
     </ul>

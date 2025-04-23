@@ -37,6 +37,11 @@ function App() {
     setDisplayMovieDetail(!displayMovieDetail);
   };
 
+  const removeMovieHandler = (id) => {
+    const filteredMovie = watchedMovies.filter((movie) => movie.imdbID !== id);
+    setWatchedMovies(filteredMovie);
+  };
+
   useEffect(() => {
     async function fetchMovie() {
       setError(false);
@@ -93,7 +98,10 @@ function App() {
 
           {!displayMovieDetail && <Statistics />}
           {watchedMovies.length > 0 && !displayMovieDetail && (
-            <WatchedMovie watchedMovies={watchedMovies} />
+            <WatchedMovie
+              removeMovieHandler={removeMovieHandler}
+              watchedMovies={watchedMovies}
+            />
           )}
           {selectedId && displayMovieDetail && (
             <MovieDetail

@@ -1,5 +1,5 @@
 .watched-movie {
-  border-bottom: 1px solid aliceblue;
+  border-bottom: 1px solid white;
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   gap: 1rem;
@@ -25,4 +25,8 @@
 }
 .watched-movie__cancel {
   align-content: center;
+}
+.watched-movie__cancel:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }/*# sourceMappingURL=WatchedMovie.css.map */
