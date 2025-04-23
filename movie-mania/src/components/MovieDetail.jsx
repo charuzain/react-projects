@@ -3,7 +3,12 @@ import './MovieDetail.scss';
 
 const API_KEY = '750cb857';
 
-const MovieDetail = ({ selectedId, addMovieHandler, watchedMovies }) => {
+const MovieDetail = ({
+  selectedId,
+  addMovieHandler,
+  watchedMovies,
+  displayMovieDetailHandler,
+}) => {
   const [selectedMovie, setSelectedMovie] = useState({});
 
   useEffect(() => {
@@ -12,7 +17,9 @@ const MovieDetail = ({ selectedId, addMovieHandler, watchedMovies }) => {
         .then((res) => {
           return res.json();
         })
-        .then((data) => setSelectedMovie(data));
+        .then((data) => {
+          setSelectedMovie(data);
+        });
     }
     fetchSelectedMovie();
   }, [selectedId]);
@@ -20,7 +27,9 @@ const MovieDetail = ({ selectedId, addMovieHandler, watchedMovies }) => {
   return (
     <>
       <header className="selected-movie">
-        <div className="back">←</div>
+        <div className="back" onClick={displayMovieDetailHandler}>
+          ←
+        </div>
         <img
           src={selectedMovie.Poster}
           alt="Movie poster"

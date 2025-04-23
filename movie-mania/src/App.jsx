@@ -17,6 +17,7 @@ function App() {
   const [selectedId, setSelectedId] = useState(null);
   const [showMovieDetail, setShowMovieDetail] = useState(false);
   const [watchedMovies, setWatchedMovies] = useState([]);
+  const [displayMovieDetail, setDisplayMovieDetail] = useState(false);
 
   const queryHandler = (e) => {
     setQuery(e.target.value);
@@ -29,6 +30,11 @@ function App() {
 
   const addMovieHandler = (newWatchedMovie) => {
     setWatchedMovies([...watchedMovies, newWatchedMovie]);
+    displayMovieDetailHandler();
+  };
+
+  const displayMovieDetailHandler = () => {
+    setDisplayMovieDetail(!displayMovieDetail);
   };
 
   useEffect(() => {
@@ -78,21 +84,23 @@ function App() {
             movies={movies}
             setSelectedId={setSelectedId}
             movieClickHandler={movieClickHandler}
+            displayMovieDetailHandler={displayMovieDetailHandler}
           />
         )}
         {error && <p>{`🛑 ${error} 🛑`}</p>}
         <div className="right-container">
           <div className="close close-watched">-</div>
 
-          {!selectedId && <Statistics />}
-          {watchedMovies.length > 0 && (
+          {!displayMovieDetail && <Statistics />}
+          {watchedMovies.length > 0 && !displayMovieDetail && (
             <WatchedMovie watchedMovies={watchedMovies} />
           )}
-          {selectedId && (
+          {selectedId && displayMovieDetail && (
             <MovieDetail
               selectedId={selectedId}
               addMovieHandler={addMovieHandler}
               watchedMovies={watchedMovies}
+              displayMovieDetailHandler={displayMovieDetailHandler}
             />
           )}
         </div>
