@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import MovieListContainer from './components/MovieListContainer';
 import NavBar from './components/NavBar';
-import WatchedMovieContainer from './components/WatchedMovieContainer';
+import WatchedMovieContainer from './components/MovieDetail';
+import Statistics from './components/Statistics';
+import MovieDetail from './components/MovieDetail';
 
 const API_KEY = '750cb857';
 
@@ -12,9 +14,15 @@ function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [showMovieDetail, setShowMovieDetail] = useState(false);
 
   const queryHandler = (e) => {
     setQuery(e.target.value);
+  };
+
+  const movieClickHandler = (id) => {
+    setSelectedId(id);
+    setShowMovieDetail(!showMovieDetail);
   };
 
   useEffect(() => {
@@ -63,12 +71,16 @@ function App() {
           <MovieListContainer
             movies={movies}
             setSelectedId={setSelectedId}
+            movieClickHandler={movieClickHandler}
           />
         )}
         {error && <p>{`🛑 ${error} 🛑`}</p>}
-        <WatchedMovieContainer
-          selectedId={selectedId}
-        />
+        <div className="watched-movie">
+          <div className="close close-watched">-</div>
+
+          {!selectedId && <Statistics />}
+          {selectedId  &&<MovieDetail selectedId={selectedId} />}
+        </div>
       </main>
     </>
   );

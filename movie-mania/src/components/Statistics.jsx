@@ -4,7 +4,7 @@ import './Statistics.scss';
 const Statistics = () => {
   return (
     <div className="stat">
-      <div className="close">-</div>
+      {/* <div className="close">-</div> */}
       <div className="stat__card">
         <p className="stat__title">Movies you watched</p>
         <div className="stat__container">

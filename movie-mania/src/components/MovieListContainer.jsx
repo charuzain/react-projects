@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './MovieListContainer.scss';
 
-const MovieListContainer = ({ movies, setSelectedId }) => {
+const MovieListContainer = ({ movies, movieClickHandler }) => {
   const [showList, setShowList] = useState(true);
+
 
   return (
     <div className="movie">
@@ -15,7 +16,7 @@ const MovieListContainer = ({ movies, setSelectedId }) => {
             <li
               key={movie.imdbID}
               className="movie__item"
-              onClick={() => setSelectedId(movie.imdbID)}
+              onClick={() => movieClickHandler(movie.imdbID)}
             >
               <div className="movie__image-container">
                 <img

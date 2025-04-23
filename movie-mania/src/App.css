@@ -53,3 +53,12 @@ nav {
   margin: 1rem;
   border-radius: 8px;
 }
+.watched-movie{
+border: 10px solid red;
+position: relative;
+}
+.close-watched{
+  top:0;
+  right:0;
+  position: absolute;
+}
