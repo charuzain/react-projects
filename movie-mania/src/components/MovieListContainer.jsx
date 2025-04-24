@@ -2,8 +2,7 @@ import './MovieListContainer.scss';
 
 const MovieListContainer = ({
   movies,
-  movieClickHandler,
-  displayMovieDetailHandler,
+  movieClickHandler  
 }) => {
   return (
     <ul className="movie">
@@ -13,7 +12,6 @@ const MovieListContainer = ({
           className="movie__item"
           onClick={() => {
             movieClickHandler(movie.imdbID);
-            displayMovieDetailHandler();
           }}
         >
           <div className="movie__image-container">

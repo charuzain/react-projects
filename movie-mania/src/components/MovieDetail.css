@@ -61,4 +61,16 @@
   justify-content: center;
   align-items: center;
   color: black;
+}
+
+.star {
+  display: flex;
+  height: 40px;
+}
+
+.star-container {
+  display: flex;
+  border: 4px solid red;
+  align-items: center;
+  gap: 1rem;
 }/*# sourceMappingURL=MovieDetail.css.map */

@@ -15,9 +15,7 @@ function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  const [showMovieDetail, setShowMovieDetail] = useState(false);
   const [watchedMovies, setWatchedMovies] = useState([]);
-  const [displayMovieDetail, setDisplayMovieDetail] = useState(false);
 
   const noOfMovieWatched = watchedMovies.length || 0;
 
@@ -39,17 +37,20 @@ function App() {
   };
 
   const movieClickHandler = (id) => {
-    setSelectedId(id);
-    setShowMovieDetail(!showMovieDetail);
+    if (id === selectedId) {
+      setSelectedId(null);
+    } else {
+      setSelectedId(id);
+    }
   };
 
   const addMovieHandler = (newWatchedMovie) => {
     setWatchedMovies([...watchedMovies, newWatchedMovie]);
-    displayMovieDetailHandler();
+    setSelectedId(null);
   };
 
   const displayMovieDetailHandler = () => {
-    setDisplayMovieDetail(!displayMovieDetail);
+    setSelectedId(null);
   };
 
   const removeMovieHandler = (id) => {
@@ -100,20 +101,21 @@ function App() {
       <NavBar query={query} queryHandler={queryHandler} movies={movies} />
       <main>
         <Container>
+          {!error && !loading && movies.length === 0 && (
+            <p>Search for a movie!</p>
+          )}
           {loading && <p>Loading.....</p>}
           {!error && !loading && (
             <MovieListContainer
               movies={movies}
-              setSelectedId={setSelectedId}
               movieClickHandler={movieClickHandler}
-              displayMovieDetailHandler={displayMovieDetailHandler}
             />
           )}
           {error && <p>{`🛑 ${error} 🛑`}</p>}
         </Container>
 
         <Container>
-          {!displayMovieDetail && (
+          {!selectedId && (
             <Statistics
               noOfMovieWatched={noOfMovieWatched}
               totalWatchTime={totalWatchTime}
@@ -121,13 +123,14 @@ function App() {
               avgUserRating={avgUserRating}
             />
           )}
-          {watchedMovies.length > 0 && !displayMovieDetail && (
+          {watchedMovies.length > 0 && !selectedId && (
             <WatchedMovie
               removeMovieHandler={removeMovieHandler}
               watchedMovies={watchedMovies}
+              movieClickHandler={movieClickHandler}
             />
           )}
-          {selectedId && displayMovieDetail && (
+          {selectedId && (
             <MovieDetail
               selectedId={selectedId}
               addMovieHandler={addMovieHandler}

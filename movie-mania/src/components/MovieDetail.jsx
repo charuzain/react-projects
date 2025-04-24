@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MovieDetail.scss';
+import StarRating from './StarRating';
 
 const API_KEY = '750cb857';
 
@@ -10,6 +11,11 @@ const MovieDetail = ({
   displayMovieDetailHandler,
 }) => {
   const [selectedMovie, setSelectedMovie] = useState({});
+  const [rating, setRating] = useState(0);
+
+  const onClickStar = (rating) => {
+    setRating(rating);
+  };
 
   useEffect(() => {
     async function fetchSelectedMovie() {
@@ -46,11 +52,24 @@ const MovieDetail = ({
           <p>{selectedMovie.Genre}</p>
         </div>
       </header>
-      <section className="selected-movie__rating-section">
-        <div> ✩✩✩✩✩✩✩✩✩✩✩</div>
-        {/* display this button only if movie doesnot exits in watchedMovies array if it has selectedId */}
-        {!watchedMovies.filter((movie) => movie.imdbID === selectedId).length >
-          0 && (
+      {watchedMovies.filter((movie) => movie.imdbID === selectedId).length >
+      0 ? (
+        <p>
+          You have given{' '}
+          {
+            watchedMovies.filter((movie) => movie.imdbID === selectedId)[0]
+              .userRating
+          }{' '}
+          🌟 to this movie
+        </p>
+      ) : (
+        <section className="selected-movie__rating-section">
+          <div className="star-container">
+            <div className="star">
+              <StarRating onClickStar={onClickStar} rating={rating} />
+            </div>
+            <p>{rating > 0 ? rating : ''}</p>
+          </div>
           <button
             className="selected-movie__btn"
             onClick={() =>
@@ -59,15 +78,15 @@ const MovieDetail = ({
                 Poster: selectedMovie.Poster,
                 Title: selectedMovie.Title,
                 imdbRating: selectedMovie.imdbRating,
-                userRating: 7,
+                userRating: rating,
                 Runtime: selectedMovie.Runtime,
               })
             }
           >
             + Add to List
           </button>
-        )}
-      </section>
+        </section>
+      )}
       <section className="selected-movie__description">
         <p className="movie-plot">{selectedMovie.Plot}</p>
         <p className="movie-actors">{`Starring:${selectedMovie.Actors}`}</p>

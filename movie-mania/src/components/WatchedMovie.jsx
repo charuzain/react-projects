@@ -1,11 +1,19 @@
 import React from 'react';
 import './WatchedMovie.scss';
 
-const WatchedMovie = ({ watchedMovies, removeMovieHandler }) => {
+const WatchedMovie = ({
+  watchedMovies,
+  removeMovieHandler,
+  movieClickHandler,
+}) => {
   return (
     <ul>
       {watchedMovies.map((movie) => (
-        <li key={movie.imdbID} className="watched-movie">
+        <li
+          key={movie.imdbID}
+          className="watched-movie"
+          onClick={() => movieClickHandler(movie.imdbID)}
+        >
           <img
             src={movie.Poster}
             alt="Poster"
@@ -21,7 +29,10 @@ const WatchedMovie = ({ watchedMovies, removeMovieHandler }) => {
           </div>
           <div
             className="watched-movie__cancel"
-            onClick={() => removeMovieHandler(movie.imdbID)}
+            onClick={(e) => {
+              e.stopPropagation();
+              removeMovieHandler(movie.imdbID);
+            }}
           >
             ❌
           </div>
