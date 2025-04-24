@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import MovieListContainer from './components/MovieListContainer';
 import NavBar from './components/NavBar';
-import WatchedMovieContainer from './components/MovieDetail';
 import Statistics from './components/Statistics';
 import MovieDetail from './components/MovieDetail';
 import WatchedMovie from './components/WatchedMovie';
+import Container from './components/Container';
 
 const API_KEY = '750cb857';
 
@@ -21,17 +21,18 @@ function App() {
 
   const noOfMovieWatched = watchedMovies.length || 0;
 
-
-  const totalWatchTime =
-    watchedMovies.reduce((a, movie) => a + parseInt(movie.Runtime), 0);
- 
-
+  const totalWatchTime = watchedMovies.reduce(
+    (a, movie) => a + parseInt(movie.Runtime),
+    0
+  );
 
   const avgImdbRating =
-    watchedMovies.reduce((a, c) => a + Number(c.imdbRating), 0) / watchedMovies.length || 0;
+    watchedMovies.reduce((a, c) => a + Number(c.imdbRating), 0) /
+      watchedMovies.length || 0;
 
   const avgUserRating =
-    watchedMovies.reduce((a, c) => a + c.userRating, 0) / watchedMovies.length || 0;
+    watchedMovies.reduce((a, c) => a + c.userRating, 0) /
+      watchedMovies.length || 0;
 
   const queryHandler = (e) => {
     setQuery(e.target.value);
@@ -73,9 +74,10 @@ function App() {
           }
 
           setMovies(data.Search);
-          setLoading(false);
+          // setLoading(false);
         })
         .catch((error) => {
+          setMovies([]);
           setError(error.message);
         })
 
@@ -95,21 +97,22 @@ function App() {
 
   return (
     <>
-      <NavBar query={query} queryHandler={queryHandler} />
+      <NavBar query={query} queryHandler={queryHandler} movies={movies} />
       <main>
-        {loading && <p>Loading.....</p>}
-        {!error && !loading && (
-          <MovieListContainer
-            movies={movies}
-            setSelectedId={setSelectedId}
-            movieClickHandler={movieClickHandler}
-            displayMovieDetailHandler={displayMovieDetailHandler}
-          />
-        )}
-        {error && <p>{`🛑 ${error} 🛑`}</p>}
-        <div className="right-container">
-          <div className="close close-watched">-</div>
+        <Container>
+          {loading && <p>Loading.....</p>}
+          {!error && !loading && (
+            <MovieListContainer
+              movies={movies}
+              setSelectedId={setSelectedId}
+              movieClickHandler={movieClickHandler}
+              displayMovieDetailHandler={displayMovieDetailHandler}
+            />
+          )}
+          {error && <p>{`🛑 ${error} 🛑`}</p>}
+        </Container>
 
+        <Container>
           {!displayMovieDetail && (
             <Statistics
               noOfMovieWatched={noOfMovieWatched}
@@ -132,7 +135,7 @@ function App() {
               displayMovieDetailHandler={displayMovieDetailHandler}
             />
           )}
-        </div>
+        </Container>
       </main>
     </>
   );

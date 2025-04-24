@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NavBar = ({ query, queryHandler }) => {
+const NavBar = ({ query, queryHandler,movies }) => {
   // const queryHandler = (e) => {
   //   setQuery(e.target.value);
   // };
@@ -17,7 +17,7 @@ const NavBar = ({ query, queryHandler }) => {
         />
       </div>
       <div>
-        <span>Found X results</span>
+        <span>Found {movies.length} results</span>
       </div>
     </nav>
   );
