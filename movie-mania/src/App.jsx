@@ -19,6 +19,20 @@ function App() {
   const [watchedMovies, setWatchedMovies] = useState([]);
   const [displayMovieDetail, setDisplayMovieDetail] = useState(false);
 
+  const noOfMovieWatched = watchedMovies.length || 0;
+
+
+  const totalWatchTime =
+    watchedMovies.reduce((a, movie) => a + parseInt(movie.Runtime), 0);
+ 
+
+
+  const avgImdbRating =
+    watchedMovies.reduce((a, c) => a + Number(c.imdbRating), 0) / watchedMovies.length || 0;
+
+  const avgUserRating =
+    watchedMovies.reduce((a, c) => a + c.userRating, 0) / watchedMovies.length || 0;
+
   const queryHandler = (e) => {
     setQuery(e.target.value);
   };
@@ -96,7 +110,14 @@ function App() {
         <div className="right-container">
           <div className="close close-watched">-</div>
 
-          {!displayMovieDetail && <Statistics />}
+          {!displayMovieDetail && (
+            <Statistics
+              noOfMovieWatched={noOfMovieWatched}
+              totalWatchTime={totalWatchTime}
+              avgImdbRating={avgImdbRating}
+              avgUserRating={avgUserRating}
+            />
+          )}
           {watchedMovies.length > 0 && !displayMovieDetail && (
             <WatchedMovie
               removeMovieHandler={removeMovieHandler}

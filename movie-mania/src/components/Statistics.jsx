@@ -1,18 +1,23 @@
 import React from 'react';
 import './Statistics.scss';
 
-const Statistics = () => {
+const Statistics = ({
+  noOfMovieWatched,
+  totalWatchTime,
+  avgImdbRating,
+  avgUserRating,
+}) => {
   return (
     <div className="stat">
       {/* <div className="close">-</div> */}
       <div className="stat__card">
         <p className="stat__title">Movies you watched</p>
         <div className="stat__container">
-          <div className="stat__movies"># 2 movies</div>
-          <div className="stat__rating">⭐️ 7.40</div>
-          <div className="stat__rating">🌟 7.40</div>
+          <div className="stat__movies"># {noOfMovieWatched} movies</div>
+          <div className="stat__rating">⭐️ { avgImdbRating}</div>
+          <div className="stat__rating">🌟 {avgUserRating}</div>
 
-          <div className="stat__timing">⏳ 400 mins</div>
+          <div className="stat__timing">⏳ {totalWatchTime} mins</div>
         </div>
       </div>
     </div>
