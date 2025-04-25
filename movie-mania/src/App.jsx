@@ -59,41 +59,46 @@ function App() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     async function fetchMovie() {
-      setError(false);
-      setLoading(true);
-      await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('Network Error');
-          }
-          return res.json();
-        })
-        .then((data) => {
-          if (data.Response === 'False') {
-            throw new Error(`Movie ${query} not found`);
-          }
+      try {
+        setError(false);
+        setLoading(true);
 
-          setMovies(data.Search);
-          // setLoading(false);
-        })
-        .catch((error) => {
-          setMovies([]);
+        const res = await fetch(
+          `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`,
+          { signal }
+        );
+        if (!res.ok) {
+          throw new Error('Network Error');
+        }
+
+        const data = await res.json();
+        if (data.Response === 'False') {
+          throw new Error(`Movie "${query}" not found`);
+        }
+
+        setMovies(data.Search);
+      } catch (error) {
+        if (error.name !== 'AbortError') {
           setError(error.message);
-        })
-
-        .finally(() => {
-          setLoading(false);
-        });
+          setMovies([]);
+        }
+      } finally {
+        setLoading(false);
+      }
     }
+
     if (query.trim().length < 3) {
       setMovies([]);
       setError(false);
-
       return;
     }
 
     fetchMovie();
+    return () => controller.abort();
   }, [query]);
 
   return (
@@ -104,7 +109,7 @@ function App() {
           {!error && !loading && movies.length === 0 && (
             <p>Search for a movie!</p>
           )}
-          {loading && <p>Loading.....</p>}
+          {loading && <p>{`Loading result for ${query}....`}</p>}
           {!error && !loading && (
             <MovieListContainer
               movies={movies}
