@@ -12,9 +12,17 @@ const MovieDetail = ({
 }) => {
   const [selectedMovie, setSelectedMovie] = useState({});
   const [rating, setRating] = useState(0);
+  const [tempRating, setTempRating] = useState(0);
 
   const onClickStar = (rating) => {
     setRating(rating);
+  };
+
+  const onMouseEnterHanlder = (numStars) => {
+    setTempRating(numStars);
+  };
+  const onMouseLeaveHandler = () => {
+    setTempRating(0);
   };
 
   useEffect(() => {
@@ -25,6 +33,8 @@ const MovieDetail = ({
         })
         .then((data) => {
           setSelectedMovie(data);
+          setRating(0);
+          setTempRating(0);
         });
     }
     fetchSelectedMovie();
@@ -66,9 +76,15 @@ const MovieDetail = ({
         <section className="selected-movie__rating-section">
           <div className="star-container">
             <div className="star">
-              <StarRating onClickStar={onClickStar} rating={rating} />
+              <StarRating
+                onClickStar={onClickStar}
+                rating={rating}
+                tempRating={tempRating}
+                onMouseLeaveHandler={onMouseLeaveHandler}
+                onMouseEnterHanlder={onMouseEnterHanlder}
+              />
             </div>
-            <p>{rating > 0 ? rating : ''}</p>
+            <p>{tempRating || rating || ''}</p>
           </div>
           <button
             className="selected-movie__btn"

@@ -1,13 +1,24 @@
 import React from 'react';
 import './StarRating.scss';
 
-const StarRating = ({ onClickStar, rating }) => {
+const StarRating = ({
+  onClickStar,
+  rating,
+  tempRating,
+  onMouseEnterHanlder,
+  onMouseLeaveHandler,
+}) => {
   return Array.from({ length: 10 }, (_, i) => (
-    <div className="rating" key={i}>
+    <div
+      className="rating"
+      key={i}
+      onMouseEnter={() => onMouseEnterHanlder(i+1)}
+      onMouseLeave={onMouseLeaveHandler}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
-        fill={i + 1 > rating ? 'none' : 'yellow'}
+        fill={i + 1 > (tempRating || rating) ? 'none' : 'yellow'}
         stroke={'yellow'}
         onClick={() => {
           onClickStar(i + 1);
