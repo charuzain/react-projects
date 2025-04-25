@@ -40,6 +40,19 @@ const MovieDetail = ({
     fetchSelectedMovie();
   }, [selectedId]);
 
+  useEffect(() => {
+    if (!selectedMovie.Title) {
+      document.title = 'movieMania';
+    } else {
+      document.title = `Movie | ${selectedMovie.Title}`;
+    }
+
+    return () => {
+      document.title = 'movieMania';
+      console.log(selectedMovie.Title);
+    };
+  }, [selectedMovie.Title]);
+
   return (
     <>
       <header className="selected-movie">
